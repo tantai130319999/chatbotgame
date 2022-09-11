@@ -11,12 +11,12 @@ import time
 with open('data/message.txt', encoding = 'utf-8') as file:
     listdata = file.read()
 _message = listdata.splitlines()
-with open('data/path.txt', encoding = 'utf-8') as file:
-    listdata = file.read()
-path = listdata.splitlines()
 with open('data/NumEmu.txt', encoding = 'utf-8') as file:
     listdata = file.read()
 NumEmu = listdata.splitlines()
+with open('data/NumRE.txt', encoding = 'utf-8') as file:
+    listdata = file.read()
+NumRE = listdata.splitlines()
 # main auto
 def main(thutu,message):
     os.system('adb devices')
@@ -25,11 +25,13 @@ def main(thutu,message):
     device = client.device(devices[thutu].serial)
     device.on_keyboar()
     while True:
-        device.input_tap(570,500)
+        device.input_tap(250,260)
         time.sleep(1)
-        for a in range(4):
-            device.input_tap(270,315)
-        device.input_tap(480,460)
+        for a in range(10):
+            device.input_tap(120,165)
+        for a in range(int(NumRE[0])):
+            device.input_tap(320,165)
+        device.input_tap(220,230)
         vaogame = 0
         while vaogame == 0:
             result = device.screencap()
@@ -39,14 +41,16 @@ def main(thutu,message):
             if kiemtra != None:
                 vaogame = 1
             kiemtra = pyscreeze.locate(r'data/delay.png',r'data/screen' + str(thutu) + '.png', confidence=.65)
-            if kiemtra != None:  
-                device.input_tap(480,400)   
+            if kiemtra != None:
+                device.input_tap(220,200)   
                 time.sleep(1)
-                device.input_tap(570,500)
+                device.input_tap(250,260)
                 time.sleep(1)
-                for a in range(4):
-                    device.input_tap(270,315)
-                device.input_tap(480,460)
+                for a in range(10):
+                    device.input_tap(120,165)
+                for a in range(int(NumRE[0])):
+                    device.input_tap(320,165)
+                device.input_tap(220,230)
         result = device.screencap()
         with open("data/screen" + str(thutu) + ".png", "wb") as fp:
             fp.write(result)
@@ -55,12 +59,12 @@ def main(thutu,message):
             # dangxem = 0
             # while dangxem == 0:
                 for m in message:
-                    device.input_tap(66,490)
+                    device.input_tap(33,258)
                     time.sleep(0.25)
-                    device.input_tap(260,320)
+                    device.input_tap(140,172)
                     time.sleep(0.25)
                     device.input_text2(m)
-                    device.input_tap(365,218)
+                    device.input_tap(323,99)
                     time.sleep(0.5)
                     result = device.screencap()
                     with open("data/screen" + str(thutu) + ".png", "wb") as fp:
@@ -92,12 +96,12 @@ def main(thutu,message):
                 times += 1
                 if chat == 0 and timban == 0 and times == 10:
                     for m in message:
-                        device.input_tap(66,490)
+                        device.input_tap(33,258)
                         time.sleep(0.25)
-                        device.input_tap(260,320)
+                        device.input_tap(140,172)
                         time.sleep(0.25)
                         device.input_text2(m)
-                        device.input_tap(365,218)
+                        device.input_tap(323,99)
                         time.sleep(0.5)
                     chat = 1
 # end main auto
